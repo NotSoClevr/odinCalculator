@@ -71,13 +71,21 @@ buttons.forEach((btn) => {
       operator.push(event.target.id);
       displayArr = [];
     } else if (event.target.id === "=") {
-      operand2.push(Number(display.textContent));
-      display.textContent = operate(
-        operand1.shift(),
-        operator.shift(),
-        operand2.shift()
-      );
-      displayArr = [];
+      if (operand2.length === 0) {
+        operand1 = [];
+        operand2 = [];
+        operator = [];
+        displayArr = [];
+        display.textContent = "Uh Oh!"
+      } else {
+        operand2.push(Number(display.textContent));
+        display.textContent = operate(
+          operand1.shift(),
+          operator.shift(),
+          operand2.shift()
+        );
+        displayArr = [];
+      }
     } else if (
       typeof Number(event.target.id) === "number" &&
       operand1.length === 0
